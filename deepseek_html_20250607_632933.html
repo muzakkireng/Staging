@@ -1,0 +1,1090 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechToolHub - Software Directory</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --secondary: #3f37c9;
+            --accent: #4895ef;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --gray: #6c757d;
+            --success: #4cc9f0;
+            --border: #dee2e6;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            --radius: 10px;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f8fafc;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: white;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+        }
+        
+        .logo i {
+            color: var(--accent);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+        
+        nav a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+        }
+        
+        nav a:hover {
+            color: var(--primary);
+        }
+        
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary);
+            transition: width 0.3s;
+        }
+        
+        nav a:hover::after {
+            width: 100%;
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--dark);
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+            border-radius: 0 0 var(--radius) var(--radius);
+            margin-bottom: 40px;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background-color: var(--success);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: 2px solid var(--success);
+            box-shadow: 0 4px 10px rgba(76, 201, 240, 0.3);
+        }
+        
+        .cta-button:hover {
+            background-color: transparent;
+            transform: translateY(-3px);
+            box-shadow: 0 7px 15px rgba(76, 201, 240, 0.4);
+        }
+        
+        /* Categories Section */
+        .section-title {
+            text-align: center;
+            margin: 40px 0 30px;
+            position: relative;
+        }
+        
+        .section-title h2 {
+            font-size: 2.2rem;
+            color: var(--dark);
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+        
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: var(--accent);
+        }
+        
+        .categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+        
+        .category-card {
+            background-color: white;
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .category-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.12);
+        }
+        
+        .card-icon {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            height: 120px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 3rem;
+            color: white;
+        }
+        
+        .card-content {
+            padding: 25px;
+        }
+        
+        .card-content h3 {
+            margin-bottom: 15px;
+            color: var(--dark);
+            font-size: 1.4rem;
+        }
+        
+        .tools-list {
+            list-style: none;
+            margin-top: 15px;
+        }
+        
+        .tools-list li {
+            padding: 8px 0;
+            border-bottom: 1px dashed var(--border);
+            display: flex;
+            align-items: center;
+        }
+        
+        .tools-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .tools-list li i {
+            color: var(--success);
+            margin-right: 10px;
+            font-size: 0.9rem;
+        }
+        
+        /* Tool Cards */
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            margin: 40px 0;
+        }
+        
+        .tool-card {
+            background: white;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            transition: transform 0.3s;
+        }
+        
+        .tool-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .tool-header {
+            padding: 20px;
+            background: linear-gradient(to right, var(--primary), var(--accent));
+            color: white;
+        }
+        
+        .tool-header h3 {
+            font-size: 1.3rem;
+            margin-bottom: 5px;
+        }
+        
+        .tool-header .category {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+        
+        .tool-body {
+            padding: 20px;
+        }
+        
+        .tool-body p {
+            color: var(--gray);
+            margin-bottom: 15px;
+            min-height: 80px;
+        }
+        
+        .tool-footer {
+            padding: 15px 20px;
+            background-color: var(--light);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .price {
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        .btn {
+            padding: 8px 15px;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            font-weight: 500;
+        }
+        
+        .btn:hover {
+            background-color: var(--secondary);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 60px 0 20px;
+            margin-top: 60px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-column h3 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background-color: var(--accent);
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+        
+        .footer-links a {
+            color: #cbd5e1;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+        }
+        
+        .contact-info {
+            list-style: none;
+        }
+        
+        .contact-info li {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+            color: #cbd5e1;
+        }
+        
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-icons a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            color: white;
+            transition: all 0.3s;
+        }
+        
+        .social-icons a:hover {
+            background-color: var(--primary);
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #94a3b8;
+            font-size: 0.9rem;
+        }
+        
+        /* Page Content */
+        .page-content {
+            background-color: white;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 40px;
+            margin: 40px 0;
+        }
+        
+        .page-content h2 {
+            color: var(--primary);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--border);
+        }
+        
+        .page-content h3 {
+            color: var(--dark);
+            margin: 25px 0 15px;
+        }
+        
+        .page-content p {
+            margin-bottom: 15px;
+            color: var(--gray);
+        }
+        
+        .page-content ul {
+            margin-left: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .page-content li {
+            margin-bottom: 10px;
+            color: var(--gray);
+        }
+        
+        /* Contact Form */
+        .contact-form {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group.full {
+            grid-column: 1 / -1;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--dark);
+        }
+        
+        input, textarea, select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid var(--border);
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: border 0.3s;
+        }
+        
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.1);
+        }
+        
+        textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        .submit-btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 5px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .submit-btn:hover {
+            background-color: var(--secondary);
+        }
+        
+        /* Sitemap */
+        .sitemap-columns {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        
+        .sitemap-list {
+            list-style: none;
+        }
+        
+        .sitemap-list h3 {
+            color: var(--primary);
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+        
+        .sitemap-list li {
+            margin-bottom: 10px;
+        }
+        
+        .sitemap-list a {
+            color: var(--dark);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .sitemap-list a:hover {
+            color: var(--primary);
+            text-decoration: underline;
+        }
+        
+        /* AdSense Compliance */
+        .compliance-section {
+            background-color: #f0f7ff;
+            border-left: 4px solid var(--success);
+            padding: 25px;
+            margin: 40px 0;
+            border-radius: 0 var(--radius) var(--radius) 0;
+        }
+        
+        .compliance-section h3 {
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+        
+        /* Tabs */
+        .tabs {
+            display: flex;
+            border-bottom: 2px solid var(--border);
+            margin-bottom: 30px;
+        }
+        
+        .tab-btn {
+            padding: 12px 25px;
+            background: none;
+            border: none;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            color: var(--gray);
+            position: relative;
+            transition: color 0.3s;
+        }
+        
+        .tab-btn.active {
+            color: var(--primary);
+        }
+        
+        .tab-btn.active::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background-color: var(--primary);
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            nav ul {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                flex-direction: column;
+                background-color: white;
+                width: 100%;
+                padding: 20px;
+                box-shadow: 0 10px 10px rgba(0,0,0,0.1);
+                transition: left 0.3s;
+                gap: 15px;
+            }
+            
+            nav ul.active {
+                left: 0;
+            }
+            
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .contact-form {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .tabs {
+                flex-wrap: wrap;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <a href="#" class="logo">
+                <i class="fas fa-toolbox"></i>
+                <span>TechToolHub</span>
+            </a>
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+            <nav>
+                <ul id="navMenu">
+                    <li><a href="#" class="active">Home</a></li>
+                    <li><a href="#categories">Categories</a></li>
+                    <li><a href="#tools">Featured Tools</a></li>
+                    <li><a href="#privacy">Privacy</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="#sitemap">Sitemap</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container hero-content">
+            <h1>Discover the Best Software Tools</h1>
+            <p>Explore our curated collection of powerful software solutions to boost your productivity and enhance your digital experience.</p>
+            <a href="#categories" class="cta-button">Browse Categories</a>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="container">
+        <!-- Categories Section -->
+        <section id="categories">
+            <div class="section-title">
+                <h2>Software Categories</h2>
+            </div>
+            
+            <div class="categories">
+                <!-- Productivity Tools -->
+                <div class="category-card">
+                    <div class="card-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div class="card-content">
+                        <h3>Productivity</h3>
+                        <p>Tools to enhance your workflow and time management</p>
+                        
+                        <ul class="tools-list">
+                            <li><i class="fas fa-check-circle"></i> Trello</li>
+                            <li><i class="fas fa-check-circle"></i> Notion</li>
+                            <li><i class="fas fa-check-circle"></i> Slack</li>
+                            <li><i class="fas fa-check-circle"></i> Evernote</li>
+                            <li><i class="fas fa-check-circle"></i> Todoist</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Development Tools -->
+                <div class="category-card">
+                    <div class="card-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <div class="card-content">
+                        <h3>Development</h3>
+                        <p>Essential software for programmers and developers</p>
+                        
+                        <ul class="tools-list">
+                            <li><i class="fas fa-check-circle"></i> Visual Studio Code</li>
+                            <li><i class="fas fa-check-circle"></i> GitHub</li>
+                            <li><i class="fas fa-check-circle"></i> Docker</li>
+                            <li><i class="fas fa-check-circle"></i> Postman</li>
+                            <li><i class="fas fa-check-circle"></i> Git</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Design Tools -->
+                <div class="category-card">
+                    <div class="card-icon">
+                        <i class="fas fa-paint-brush"></i>
+                    </div>
+                    <div class="card-content">
+                        <h3>Design</h3>
+                        <p>Creative applications for designers and artists</p>
+                        
+                        <ul class="tools-list">
+                            <li><i class="fas fa-check-circle"></i> Adobe Photoshop</li>
+                            <li><i class="fas fa-check-circle"></i> Figma</li>
+                            <li><i class="fas fa-check-circle"></i> Sketch</li>
+                            <li><i class="fas fa-check-circle"></i> Canva</li>
+                            <li><i class="fas fa-check-circle"></i> Adobe Illustrator</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Security Tools -->
+                <div class="category-card">
+                    <div class="card-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <div class="card-content">
+                        <h3>Security</h3>
+                        <p>Protect your data and privacy with these tools</p>
+                        
+                        <ul class="tools-list">
+                            <li><i class="fas fa-check-circle"></i> NordVPN</li>
+                            <li><i class="fas fa-check-circle"></i> LastPass</li>
+                            <li><i class="fas fa-check-circle"></i> Malwarebytes</li>
+                            <li><i class="fas fa-check-circle"></i> Bitdefender</li>
+                            <li><i class="fas fa-check-circle"></i> Authy</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Multimedia Tools -->
+                <div class="category-card">
+                    <div class="card-icon">
+                        <i class="fas fa-photo-video"></i>
+                    </div>
+                    <div class="card-content">
+                        <h3>Multimedia</h3>
+                        <p>Software for audio, video, and image editing</p>
+                        
+                        <ul class="tools-list">
+                            <li><i class="fas fa-check-circle"></i> Adobe Premiere Pro</li>
+                            <li><i class="fas fa-check-circle"></i> Audacity</li>
+                            <li><i class="fas fa-check-circle"></i> DaVinci Resolve</li>
+                            <li><i class="fas fa-check-circle"></i> OBS Studio</li>
+                            <li><i class="fas fa-check-circle"></i> GIMP</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Utility Tools -->
+                <div class="category-card">
+                    <div class="card-icon">
+                        <i class="fas fa-wrench"></i>
+                    </div>
+                    <div class="card-content">
+                        <h3>Utilities</h3>
+                        <p>Essential system tools and maintenance software</p>
+                        
+                        <ul class="tools-list">
+                            <li><i class="fas fa-check-circle"></i> CCleaner</li>
+                            <li><i class="fas fa-check-circle"></i> WinRAR</li>
+                            <li><i class="fas fa-check-circle"></i> 7-Zip</li>
+                            <li><i class="fas fa-check-circle"></i> VLC Media Player</li>
+                            <li><i class="fas fa-check-circle"></i> Recuva</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Tools -->
+        <section id="tools">
+            <div class="section-title">
+                <h2>Featured Software Tools</h2>
+            </div>
+            
+            <div class="tools-grid">
+                <div class="tool-card">
+                    <div class="tool-header">
+                        <h3>Visual Studio Code</h3>
+                        <div class="category">Development</div>
+                    </div>
+                    <div class="tool-body">
+                        <p>A free source-code editor made by Microsoft with built-in support for debugging, embedded Git control, syntax highlighting, and intelligent code completion.</p>
+                    </div>
+                    <div class="tool-footer">
+                        <span class="price">Free</span>
+                        <button class="btn">Learn More</button>
+                    </div>
+                </div>
+                
+                <div class="tool-card">
+                    <div class="tool-header">
+                        <h3>Figma</h3>
+                        <div class="category">Design</div>
+                    </div>
+                    <div class="tool-body">
+                        <p>A collaborative web application for interface design with real-time collaboration features. Perfect for UI/UX designers and teams.</p>
+                    </div>
+                    <div class="tool-footer">
+                        <span class="price">Freemium</span>
+                        <button class="btn">Learn More</button>
+                    </div>
+                </div>
+                
+                <div class="tool-card">
+                    <div class="tool-header">
+                        <h3>Trello</h3>
+                        <div class="category">Productivity</div>
+                    </div>
+                    <div class="tool-body">
+                        <p>A web-based Kanban-style list-making application that enables teams to manage projects and tasks with flexible boards, lists, and cards.</p>
+                    </div>
+                    <div class="tool-footer">
+                        <span class="price">Freemium</span>
+                        <button class="btn">Learn More</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- AdSense Compliance Section -->
+        <div class="compliance-section">
+            <h3>AdSense Compliance Notice</h3>
+            <p>This website is designed to meet Google AdSense requirements with:</p>
+            <ul>
+                <li>Comprehensive Privacy Policy page</li>
+                <li>Clear Contact Information</li>
+                <li>Detailed Site Map</li>
+                <li>Original, valuable content</li>
+                <li>User-friendly navigation</li>
+                <li>Mobile-responsive design</li>
+                <li>No prohibited content</li>
+                <li>Clear value to users</li>
+            </ul>
+        </div>
+
+        <!-- Additional Pages Tabs -->
+        <div class="tabs">
+            <button class="tab-btn active" data-tab="privacy">Privacy Policy</button>
+            <button class="tab-btn" data-tab="contact">Contact Us</button>
+            <button class="tab-btn" data-tab="sitemap">Site Map</button>
+        </div>
+        
+        <!-- Privacy Policy -->
+        <div id="privacy" class="tab-content active">
+            <div class="page-content">
+                <h2>Privacy Policy</h2>
+                <p>Last updated: September 10, 2023</p>
+                
+                <h3>Information Collection and Use</h3>
+                <p>We collect several different types of information for various purposes to provide and improve our service to you.</p>
+                
+                <h3>Types of Data Collected</h3>
+                <p><strong>Personal Data:</strong> While using our service, we may ask you to provide us with certain personally identifiable information that can be used to contact or identify you.</p>
+                <p><strong>Usage Data:</strong> We may also collect information on how the service is accessed and used.</p>
+                <p><strong>Tracking & Cookies Data:</strong> We use cookies and similar tracking technologies to track activity on our service.</p>
+                
+                <h3>Use of Data</h3>
+                <p>TechToolHub uses the collected data for various purposes:</p>
+                <ul>
+                    <li>To provide and maintain our service</li>
+                    <li>To notify you about changes to our service</li>
+                    <li>To allow you to participate in interactive features</li>
+                    <li>To provide customer support</li>
+                    <li>To gather analysis or valuable information</li>
+                    <li>To monitor the usage of our service</li>
+                    <li>To detect, prevent and address technical issues</li>
+                </ul>
+                
+                <h3>Third-Party Services</h3>
+                <p>We use third-party service providers to monitor and analyze the use of our service.</p>
+                <p><strong>Google AdSense:</strong> We use Google AdSense to display advertisements on our website.</p>
+            </div>
+        </div>
+        
+        <!-- Contact Us -->
+        <div id="contact" class="tab-content">
+            <div class="page-content">
+                <h2>Contact Us</h2>
+                <p>Have questions or feedback? We'd love to hear from you!</p>
+                
+                <div class="contact-form">
+                    <div class="form-group">
+                        <label for="name">Full Name</label>
+                        <input type="text" id="name" placeholder="Enter your name">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" placeholder="Enter your email">
+                    </div>
+                    
+                    <div class="form-group full">
+                        <label for="subject">Subject</label>
+                        <input type="text" id="subject" placeholder="What is your question about?">
+                    </div>
+                    
+                    <div class="form-group full">
+                        <label for="message">Message</label>
+                        <textarea id="message" placeholder="Enter your message here..."></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <button type="submit" class="submit-btn">Send Message</button>
+                    </div>
+                </div>
+                
+                <div class="contact-info" style="margin-top: 40px;">
+                    <h3>Other Ways to Reach Us</h3>
+                    <ul>
+                        <li><i class="fas fa-envelope"></i> Email: contact@techtoolhub.example</li>
+                        <li><i class="fas fa-phone"></i> Phone: +1 (555) 123-4567</li>
+                        <li><i class="fas fa-map-marker-alt"></i> Address: 123 Tech Street, San Francisco, CA 94103</li>
+                        <li><i class="fas fa-clock"></i> Business Hours: Monday-Friday, 9:00 AM - 6:00 PM PST</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Site Map -->
+        <div id="sitemap" class="tab-content">
+            <div class="page-content">
+                <h2>Site Map</h2>
+                <p>Explore our complete website structure for easy navigation.</p>
+                
+                <div class="sitemap-columns">
+                    <div class="sitemap-column">
+                        <ul class="sitemap-list">
+                            <h3>Main Pages</h3>
+                            <li><a href="#">Home</a></li>
+                            <li><a href="#categories">Categories</a></li>
+                            <li><a href="#tools">Featured Tools</a></li>
+                            <li><a href="#privacy">Privacy Policy</a></li>
+                            <li><a href="#contact">Contact Us</a></li>
+                            <li><a href="#sitemap">Site Map</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="sitemap-column">
+                        <ul class="sitemap-list">
+                            <h3>Software Categories</h3>
+                            <li><a href="#">Productivity Tools</a></li>
+                            <li><a href="#">Development Tools</a></li>
+                            <li><a href="#">Design Tools</a></li>
+                            <li><a href="#">Security Tools</a></li>
+                            <li><a href="#">Multimedia Tools</a></li>
+                            <li><a href="#">Utility Tools</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="sitemap-column">
+                        <ul class="sitemap-list">
+                            <h3>Resources</h3>
+                            <li><a href="#">Software Blog</a></li>
+                            <li><a href="#">Tutorials</a></li>
+                            <li><a href="#">Tool Comparisons</a></li>
+                            <li><a href="#">User Reviews</a></li>
+                            <li><a href="#">FAQs</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="sitemap-column">
+                        <ul class="sitemap-list">
+                            <h3>Company</h3>
+                            <li><a href="#">About Us</a></li>
+                            <li><a href="#">Our Team</a></li>
+                            <li><a href="#">Careers</a></li>
+                            <li><a href="#">Partnerships</a></li>
+                            <li><a href="#">Press Kit</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>About TechToolHub</h3>
+                    <p>We provide carefully curated software solutions to help individuals and businesses achieve their goals efficiently.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#categories">Categories</a></li>
+                        <li><a href="#privacy">Privacy Policy</a></li>
+                        <li><a href="#contact">Contact Us</a></li>
+                        <li><a href="#sitemap">Site Map</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Contact Info</h3>
+                    <ul class="contact-info">
+                        <li><i class="fas fa-map-marker-alt"></i> 123 Tech Street, San Francisco, CA 94103</li>
+                        <li><i class="fas fa-phone"></i> +1 (555) 123-4567</li>
+                        <li><i class="fas fa-envelope"></i> contact@techtoolhub.example</li>
+                        <li><i class="fas fa-clock"></i> Mon-Fri: 9:00 AM - 6:00 PM</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 TechToolHub. All rights reserved. | Designed for Google AdSense compliance</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobileMenuBtn').addEventListener('click', function() {
+            document.getElementById('navMenu').classList.toggle('active');
+        });
+        
+        // Tab functionality
+        const tabBtns = document.querySelectorAll('.tab-btn');
+        const tabContents = document.querySelectorAll('.tab-content');
+        
+        tabBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Remove active class from all buttons and contents
+                tabBtns.forEach(b => b.classList.remove('active'));
+                tabContents.forEach(c => c.classList.remove('active'));
+                
+                // Add active class to clicked button
+                btn.classList.add('active');
+                
+                // Show corresponding content
+                const tabId = btn.getAttribute('data-tab');
+                document.getElementById(tabId).classList.add('active');
+            });
+        });
+        
+        // Smooth scrolling for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    window.scrollTo({
+                        top: target.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
